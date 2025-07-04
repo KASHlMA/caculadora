@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="219.0" prefWidth="326.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.caculadora.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+        <Button fx:id="btnSumar" onAction="#sumar" text="Sumar" />
+        <Button fx:id="btnRestar" onAction="#restar" text="Restar" />
+      <Button fx:id="btnDividir" onAction="#dividir" text="Dividir" />
+        <Button fx:id="btnMultiplicar" onAction="#multiplicar" text="Multiplicar" />
+</VBox>
