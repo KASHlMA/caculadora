@@ -21,6 +21,11 @@ public class HelloController{
     @FXML
     private Button btnMultiplicar;
 
+    @FXML private Label lblResultado;
+    @FXML private Button btnDividir;
+    @FXML private TextField txt1;
+    @FXML private TextField txt2;
+
     @FXML
     protected void sumar(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("sumar.fxml"));
@@ -68,4 +73,22 @@ public class HelloController{
         stage.show();
 
     }
+}
+
+
+
+
+protected void division() {
+    btnDividir.setOnAction(e -> {
+        double num1 = Double.parseDouble(txt1.getText());
+        double num2 = Double.parseDouble(txt2.getText());
+        if (num1 == 0) {
+            lblResultado.setText("No puedes dividir cero");
+        }else if (num2 == 0) {
+            lblResultado.setText("No puedes dividir cero");
+        }else {
+            double resultado = num1 / num2;
+            lblResultado.setText("El resultado es: " + resultado);
+        }
+    });
 }
