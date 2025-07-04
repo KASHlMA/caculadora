@@ -1,4 +1,3 @@
-
 package com.example.caculadora;
 
 import javafx.event.ActionEvent;
@@ -11,63 +10,91 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class HelloController {
 
-    @FXML
-    private Button btnSumar;
-    @FXML
-    private Button btnRestar;
-    @FXML
-    private Button btnDividir;
-    @FXML
-    private Button btnMultiplicar;
-    @FXML
-    private TextField txt1;
-    @FXML
-    private TextField txt2;
-    @FXML
-    private Label lblResultado;
+    // Elementos para navegación principal
+    @FXML private Button btnSumar;
+    @FXML private Button btnRestar;
+    @FXML private Button btnDividir;
+    @FXML private Button btnMultiplicar;
 
+    // Elementos para operaciones matemáticas
+    @FXML private TextField txt1;
+    @FXML private TextField txt2;
+    @FXML private Label lblResultado;
+
+    // Navegar a pantalla de suma
     @FXML
-    protected void sumar(ActionEvent event) throws IOException {
-        loadFXML("sumar.fxml", event);
+    private void irASumar(ActionEvent event) throws IOException {
+        cambiarVentana("sumar.fxml", event);
     }
 
+    // Navegar a pantalla de resta
     @FXML
-    protected void restar(ActionmdEvent event) throws IOException {
-        loadFXML("restar.fxml", event);
+    private void irARestar(ActionEvent event) throws IOException {
+        cambiarVentana("restar.fxml", event);
     }
 
+    // Navegar a pantalla de división
     @FXML
-    protected void dividir(ActionEvent event) throws IOException {
-        loadFXML("dividir.fxml", event);
+    private void irADividir(ActionEvent event) throws IOException {
+        cambiarVentana("dividir.fxml", event);
     }
 
+    // Navegar a pantalla de multiplicación
     @FXML
-    protected void multiplicar(ActionEvent event) throws IOException {
-        loadFXML("multiplicar.fxml", event);
+    private void irAMultiplicar(ActionEvent event) throws IOException {
+        cambiarVentana("multiplicar.fxml", event);
     }
 
+    // Método llamado desde botones de operación (en FXML) para calcular y mostrar el resultado
     @FXML
-    protected void onHelloButtonClick() {
-        double num1 = Double.parseDouble(txt1.getText());
-        double num2 = Double.parseDouble(txt2.getText());
-        if (num1 == 0 || num2 == 0) {
-            lblResultado.setText("No se aceptan ceros");
-        } else {
-            double resultado = num1 + num2;
-            lblResultado.setText("El resultado es: " + resultado);
+    private void realizarOperacion(ActionEvent event) {
+        try {
+            double num1 = Double.parseDouble(txt1.getText());
+            double num2 = Double.parseDouble(txt2.getText());
+
+            String operacion = ((Button) event.getSource()).getText().toLowerCase();
+            double resultado = 0;
+
+            switch (operacion) {
+                case "sumar":
+                    resultado = num1 + num2;
+                    break;
+                case "restar":
+                    resultado = num1 - num2;
+                    break;
+                case "multiplicar":
+                    resultado = num1 * num2;
+                    break;
+                case "dividir":
+                    if (num2 == 0) {
+                        lblResultado.setText("Error: División por cero");
+                        return;
+                    }
+                    resultado = num1 / num2;
+                    break;
+                default:
+                    lblResultado.setText("Operación desconocida");
+                    return;
+            }
+
+            lblResultado.setText("Resultado: " + resultado);
+        } catch (NumberFormatException e) {
+            lblResultado.setText("Ingresa números válidos");
         }
     }
 
-    private void loadFXML(String fxml, ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+    // Función reutilizable para cambiar de escena
+    private void cambiarVentana(String nombreFXML, ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
         Parent root = loader.load();
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
-        stage.setTitle("Ventana de operación");
+        stage.setTitle("Calculadora - " + nombreFXML.replace(".fxml", ""));
         stage.show();
     }
 }
