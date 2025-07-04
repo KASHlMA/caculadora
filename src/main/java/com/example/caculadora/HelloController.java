@@ -15,42 +15,35 @@ import java.io.IOException;
 
 public class HelloController {
 
-    // Elementos para navegación principal
     @FXML private Button btnSumar;
     @FXML private Button btnRestar;
     @FXML private Button btnDividir;
     @FXML private Button btnMultiplicar;
 
-    // Elementos para operaciones matemáticas
     @FXML private TextField txt1;
     @FXML private TextField txt2;
     @FXML private Label lblResultado;
 
-    // Navegar a pantalla de suma
     @FXML
     private void irASumar(ActionEvent event) throws IOException {
         cambiarVentana("sumar.fxml", event);
     }
 
-    // Navegar a pantalla de resta
     @FXML
     private void irARestar(ActionEvent event) throws IOException {
         cambiarVentana("restar.fxml", event);
     }
 
-    // Navegar a pantalla de división
     @FXML
     private void irADividir(ActionEvent event) throws IOException {
         cambiarVentana("dividir.fxml", event);
     }
 
-    // Navegar a pantalla de multiplicación
     @FXML
     private void irAMultiplicar(ActionEvent event) throws IOException {
         cambiarVentana("multiplicar.fxml", event);
     }
 
-    // Método llamado desde botones de operación (en FXML) para calcular y mostrar el resultado
     @FXML
     private void realizarOperacion(ActionEvent event) {
         try {
@@ -88,7 +81,6 @@ public class HelloController {
         }
     }
 
-    // Función reutilizable para cambiar de escena
     private void cambiarVentana(String nombreFXML, ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
         Parent root = loader.load();
