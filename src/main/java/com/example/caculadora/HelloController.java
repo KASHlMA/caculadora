@@ -69,3 +69,19 @@ public class HelloController{
 
     }
 }
+@FXML
+protected void onHelloButtonClick() {
+    btnSumar.setOnAction(e -> {
+        double num1 = Double.parseDouble(txt1.getText()); //Casting
+        double num2 = Double.parseDouble(txt2.getText()); //obtener el numero y guardarlo en num2
+        if (num1 == 0) {
+            lblResultado.setText("No se aceptan ceros");
+        } else if (num2 == 0) {
+            lblResultado.setText("No se aceptan ceros");
+        } else {
+            double resultado = num1 + num2;
+            lblResultado.setText("El resultado es: " + resultado); //set para meterle algo
+        }
+    });
+}
+
